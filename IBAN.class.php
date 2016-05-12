@@ -42,8 +42,7 @@ and open the template in the editor.
                 }
             }
             
-            $iban = new IBAN();
-            echo $iban;
+            
             
         ?>
     </body>
