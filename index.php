@@ -7,5 +7,5 @@
  */
 include_once 'IBAN.class.php';
 $iban = new IBAN();
-echo $iban;
+echo $iban->addNumbers();
 

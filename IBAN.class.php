@@ -31,10 +31,12 @@ and open the template in the editor.
                 }
                 
                 
-                protected function addNumbers() {
-                    $sum = '';
+                public function addNumbers() {
                     
-                    foreach ($this->exampleStringNumber as $val) {
+                    $sum = '';
+                    $strSplit = str_split($this->exampleStringNumber);
+                    
+                    foreach ($strSplit as $val) {
                         $sum += $val;  
                     }
                     
