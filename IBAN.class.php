@@ -21,8 +21,11 @@ and open the template in the editor.
                  * @return Number
                  */
                 protected function convNum($num){
-                    if($num >= 10) { 
-                        $sum = 1 + ($num % 10);
+                    
+                    $number = $num * 2;
+                    
+                    if($number >= 10) { 
+                        $sum = 1 + ($number % 10);
                     }else{
                         $sum = $num;
                     }
@@ -30,14 +33,29 @@ and open the template in the editor.
                     return $sum;
                 }
                 
-                
+                /**
+                 * If 1 then number is even 
+                 * If 0 then number is odd
+                 *                   
+                 * @return int
+                 */
+                protected function evenOdd() {
+                    if(strlen($this->exampleStringNumber)%2 == 0){
+                        $flag = 1;
+                    }else{
+                        $flag = 0;
+                    }
+                    return $flag;
+                }
+
+
                 public function addNumbers() {
                     
-                    $sum = '';
+                    $sum = null;
                     $strSplit = str_split($this->exampleStringNumber);
                     
                     foreach ($strSplit as $val) {
-                        $sum += $val;  
+                        $sum += $this->convNum($val);  
                     }
                     
                     return $sum;
