@@ -11,6 +11,39 @@ and open the template in the editor.
     </head>
     <body>
         <?php 
+            class IBAN {
+                var $exampleStringNumber = '176248';
+                
+                /**
+                 * retrurn right number
+                 * 
+                 * @param Number $num
+                 * @return Number
+                 */
+                protected function convNum($num){
+                    if($num >= 10) { 
+                        $sum = 1 + ($num % 10);
+                    }else{
+                        $sum = $num;
+                    }
+                    
+                    return $sum;
+                }
+                
+                
+                protected function addNumbers() {
+                    $sum = '';
+                    
+                    foreach ($this->exampleStringNumber as $val) {
+                        $sum += $val;  
+                    }
+                    
+                    return $sum;
+                }
+            }
+            
+            $iban = new IBAN();
+            echo $iban;
             
         ?>
     </body>
