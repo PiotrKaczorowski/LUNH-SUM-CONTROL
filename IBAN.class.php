@@ -55,23 +55,21 @@ Piotr Kaczorowski ctechnolgy.pl
             }
 
             protected function addNumbers() {
-
-                $sum = 0;
-                $k = 0;
-                $strSplit = str_split($this->identNumber);
-
+                $sum = 0; $k = 0; $strSplit = str_split($this->identNumber);
+                
                 if ($this->evenOdd()) {
+                    
                     foreach ($strSplit as $val) {
-                        $k++;
-                        if ($k % 2 == 0)
+                        if ($k++ % 2 == 0){
                             $sum += $val;
-                        else
+                        }else{
                             $sum += $this->convNum($val);
+                        }
                     }
                 }else{
                     foreach ($strSplit as $val) {
-                        $k++;
-                        if ($k % 2 == 0) {
+                        
+                        if ($k++ % 2 == 0) {
                             $sum += $this->convNum($val);
                         } else {
                             $sum += $val;
@@ -82,8 +80,9 @@ Piotr Kaczorowski ctechnolgy.pl
             }
             
             public function isValididentNumber($userNumber='') {
-                if(isset($userNumber))                  
+                if(isset($userNumber)){                  
                     $this->identNumber = $userNumber;
+                }
                 if($this->addNumbers()%10 == 0) {
                     $comment = "Numer prawidowy";
                 }else{
