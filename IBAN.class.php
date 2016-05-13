@@ -11,8 +11,11 @@ and open the template in the editor.
     </head>
     <body>
         <?php 
-            class IBAN {
-                var $exampleStringNumber = '176248';
+            class IBAN {                  
+                // number with sum controle (3)
+                // if event 176248 then 8x2 2x2 7x2 it fallows that we convert positon form 2
+                // if odd position 1 3 5 7 ...  if fallows that we convert position from 1
+                var $identNumber = '176248';
                 
                 /**
                  * retrurn right number
@@ -27,7 +30,7 @@ and open the template in the editor.
                     if($number >= 10) { 
                         $sum = 1 + ($number % 10);
                     }else{
-                        $sum = $num;
+                        $sum = $number;
                     }
                     
                     return $sum;
@@ -40,7 +43,7 @@ and open the template in the editor.
                  * @return int
                  */
                 protected function evenOdd() {
-                    if(strlen($this->exampleStringNumber)%2 == 0){
+                    if(strlen($this->identNumber)%2 == 0){
                         $flag = 1;
                     }else{
                         $flag = 0;
@@ -51,12 +54,25 @@ and open the template in the editor.
 
                 public function addNumbers() {
                     
-                    $sum = null;
-                    $strSplit = str_split($this->exampleStringNumber);
+                    $sum = 0 ; $k = 0;
+                    $strSplit = str_split($this->identNumber);
                     
-                    foreach ($strSplit as $val) {
-                        $sum += $this->convNum($val);  
-                    }
+                    if($this->evenOdd()){
+                       foreach ($strSplit as $val) {
+                         $k++;
+                         if($k%2 == 0) {
+                             $sum += $this->convNum($val);
+                         }else{
+                             $sum += $val;     
+                         }
+                       } 
+                    }else{
+                       foreach ($strSplit as $val) {
+                         $k++;
+                         if($k%2 == 0) $sum += $val;
+                         else $sum += $this->convNum($val);    
+                       }  
+                    }             
                     
                     return $sum;
                 }
