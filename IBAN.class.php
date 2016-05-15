@@ -16,11 +16,12 @@ controle iban number (LUNH SUM CONTROL )
             // number with sum controle (3)
             // if event 176248 then 8x2 2x2 7x2 it fallows that we convert positon form 2
             // if odd position 1 3 5 7 ...  if fallows that we convert position from 1
-            var $identNumber;
-            
-            public function __construct() {
-                $this->identNumber = '1762483';
+            private $identNumber;
+
+            public function __construct($identNumber) {
+                $this->identNumber = $identNumber;
             }
+
             /**
              * retrurn right number
              * 
@@ -56,37 +57,39 @@ controle iban number (LUNH SUM CONTROL )
             }
 
             protected function addNumbers() {
-                $sum = 0; $k = 0; $strSplit = str_split($this->identNumber);
-                
+                $sum = 0;
+                $k = 0;
+                $strSplit = str_split($this->identNumber);
+
                 if ($this->evenOdd()) {
-                    
+
                     foreach ($strSplit as $val) {
-                        if ($k++ % 2 == 0){
-                            $sum += $val;
-                        }else{
-                            $sum += $this->convNum($val);
-                        }
-                    }
-                }else{
-                    foreach ($strSplit as $val) {
-                        
                         if ($k++ % 2 == 0) {
                             $sum += $this->convNum($val);
                         } else {
                             $sum += $val;
                         }
                     }
+                } else {
+                    foreach ($strSplit as $val) {
+
+                        if ($k++ % 2 == 0) {
+                            $sum += $val;
+                        } else {
+                            $sum += $this->convNum($val);
+                        }
+                    }
                 }
                 return $sum;
             }
-            
-            public function isValididentNumber($userNumber='') {
-                if(isset($userNumber)){                  
+
+            public function isValididentNumber($userNumber = '') {
+                if ($userNumber != '') {
                     $this->identNumber = $userNumber;
                 }
-                if($this->addNumbers()%10 == 0) {
+                if ($this->addNumbers() % 10 == 0) {
                     $comment = "Numer prawidowy";
-                }else{
+                } else {
                     $comment = "Zły numer";
                 }
                 return $comment;
